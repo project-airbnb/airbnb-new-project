@@ -2,63 +2,113 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>View</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-     <!--Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+    <title>List User</title>
 </head>
-<br>
-<h1 class="text-center">List user</h1>
-<div class="container">
-<form>
-    <div class="col-md-6">
-    <form  class="search-form">
-        <tr>
-            <td><input class="form-control" value="name" name="s" type="text"></td>
-            <!--<td> <input type="submit" value="Click"></td>-->
-            <td><button class="btn btn-link search-btn"> <i class="glyphicon glyphicon-search"></i>
-            </button></td>
-        </tr>
-    </form>
+<body>
+<div class="bg-overlay">
+    <div class="navbar navbar-expand-sm">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/css/dota2button.jpg}" class="picture">
+        </a>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active main-content">
+                    <button class="btn btn-outline-light" data-toggle="modal" data-target=".mode">Log in</button>
+                    <div class="mode fade modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                </div>
+                                <div class="modal-body" style="color: deeppink">
+                                    <form th:action="@{/login}" method="POST">
+                                        <div class="form-group">
+                                            <label for="username">User name:</label>
+                                            <input class="form-control" type="text" id="username" name="username" placeholder="Your username" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Password:</label>
+                                            <input class="form-control" type="password" name="password" placeholder="Your password" id="pwd" />
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox"> Remember me
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Login</button> <br />
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-info" data-dismiss="modal">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Sign Up </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</form></br>
-<table border="1" class="table table-striped" th:object="${users}">
-    <tr>
-       <td>ID</td>
-       <td>Password</td>
-       <td>UserName</td>
-       <td>Email</td>
-       <td>Phone</td>
-       <td>Address</td>
-       <td>Gender</td>
-       <td>Level-Type</td>
-       <td>Delete</td>
-       <td>Edit</td>
-    </tr>
-    <th:block th:each="user: ${users}">
-        <tr>
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.phone}"></td>
-            <td th:text="${user.address}"></td>
-            <td th:text="${user.gender}"></td>
-            <td th:text="${user.level_type}"></td>
-            <td><button class="btn btn-danger" style="background: blue"><a th:href="@{/delete/__${user.id}__}">Delete</a></button></td>
-            <td><button class="btn btn-danger" style="background: red"><a th:href="@{/edit/__${user.id}__}">Edit</a></button></td>
-        </tr>
-    </th:block>
-</table>
-<div>
-    <a th:href="@{'/'(page=${users.number - 1})}" th:if="${users.hasPrevious()}">Previous</a>
-    <span th:text="${users.number + 1}"></span>/<span th:text="${users.totalPages}"></span>
-    <a th:href="@{'/'(page=${users.number + 1})}" th:if="${users.hasNext()}">Next</a>
+    <br>
+    <br>
+    <div class="container">
+        <h1>List User</h1>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <form class="search-form">
+            <input class="form-control" value="name" name="s" type="text">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </br>
+        <table border="1" class="table table-striped" th:object="${users}">
+            <tr>
+                <td>ID</td>
+                <td>Password</td>
+                <td>UserName</td>
+                <td>Email</td>
+                <td>Phone</td>
+                <td>Address</td>
+                <td>Gender</td>
+                <td>Level-Type</td>
+                <td>Delete</td>
+                <td>Edit</td>
+            </tr>
+            <th:block th:each="user: ${users}">
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phone}"></td>
+                    <td th:text="${user.address}"></td>
+                    <td th:text="${user.gender}"></td>
+                    <td th:text="${user.level_type}"></td>
+                    <td><button class="btn btn-danger" style="background: blue"><a th:href="@{/delete/__${user.id}__}">Delete</a></button></td>
+                    <td><button class="btn btn-danger" style="background: red"><a th:href="@{/edit/__${user.id}__}">Edit</a></button></td>
+                </tr>
+            </th:block>
+        </table>
+        <br>
+        <br>
+        <div>
+            <a th:href="@{'/'(page=${users.number - 1})}" th:if="${users.hasPrevious()}">Previous</a>
+            <span th:text="${users.number + 1}"></span>/<span th:text="${users.totalPages}"></span>
+            <a th:href="@{'/'(page=${users.number + 1})}" th:if="${users.hasNext()}">Next</a>
+        </div>
+    </div>
 </div>
-</div>
-
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>Footer</p>
+    </div>
 </body>
 </html>

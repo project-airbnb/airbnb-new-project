@@ -55,7 +55,7 @@ public class LoginControllerTest {
 
     @Test
     public void checkLogin() throws Exception {
-        mockMvc.perform(get("home/login"))
+        mockMvc.perform(get("/"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(model().attribute("username", username))
                 .andExpect(model().attribute("password", password))
