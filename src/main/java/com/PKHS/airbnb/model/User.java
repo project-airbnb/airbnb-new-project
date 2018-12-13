@@ -2,7 +2,6 @@ package com.PKHS.airbnb.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,8 +18,9 @@ public class User implements Serializable {
     private String gender;
     private Integer level_type;
 
-    public User() {
+    public User(String username, String password) {
     }
+
 
     public Integer getId() {
         return id;
