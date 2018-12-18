@@ -40,4 +40,9 @@ public class HouseController {
         modelAndView.addObject("house", house);
         return modelAndView;
     }
+    @GetMapping("/test")
+    public ModelAndView test() {
+        ModelAndView modelAndView = new ModelAndView("house/viewDetail");
+        return modelAndView;
+    }
 }
